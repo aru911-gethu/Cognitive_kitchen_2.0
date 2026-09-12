@@ -55,8 +55,6 @@ def get_hf_llm(model_id: str = "Qwen/Qwen2.5-0.5B-Instruct") -> HuggingFacePipel
 @functools.lru_cache(maxsize=1)
 def get_openai_llm(model_name: str = "gpt-4o-mini") -> ChatOpenAI:
     return ChatOpenAI(model=model_name, temperature=0.1, streaming=True)
-
-
 @functools.lru_cache(maxsize=4)
 def get_vector_store(index_name: str):
     return load_faiss_index(index_name=index_name)

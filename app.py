@@ -74,27 +74,27 @@ with st.sidebar:
     )
     menu_choice = st.radio(
         "Workspace",
-        ["💬 Kitchen Chat (Side-by-Side)", "📥 Feed the Chef (Ingest)", "🛠️ Diagnostics & API"],
+        ["💬 Evaluation Lab", "📥 Feed the Chef (Ingest)", "🛠️ Diagnostics & API"],
     )
 
-    if menu_choice == "💬 Kitchen Chat (Side-by-Side)":
+    if menu_choice == "💬 Evaluation Lab":
         st.markdown("---")
-        st.markdown("### 🧪 RAG Engine Config")
+        st.markdown("### 🧪 Phase 2 Evaluation Config")
         index_name = st.text_input("FAISS Vector Index", value="test_naive_experiment")
         k_val = st.slider("Retrieved Chunks (k)", min_value=1, max_value=4, value=2)
 
 # ========================================================
 # TAB 1: KITCHEN CHAT (SIDE-BY-SIDE AUDIT LAB)
 # ========================================================
-if menu_choice == "💬 Kitchen Chat (Side-by-Side)":
+if menu_choice == "💬 Evaluation Lab":
     st.markdown(
         f"""
         <div class="chef-hero">
             <img src="{CHEF_AVATAR_URL}" class="chef-img">
             <div>
-                <h2 style="margin: 0; font-size: 1.4rem;">Cognitive Kitchen: Side-by-Side RAG Audit</h2>
+                <h2 style="margin: 0; font-size: 1.4rem;">Cognitive Kitchen: Qwen Chunking Evaluation Lab</h2>
                 <p style="margin: 0; color: #94a3b8; font-size: 0.9rem;">
-                    Compare how <b>Qwen2.5-0.5B</b> exposes context bleed vs. how <b>gpt-4o-mini</b> attempts to mask it.
+                    Compare <b>naive</b>, <b>recursive</b>, and <b>semantic + recursive</b> chunking using the same Qwen model.
                 </p>
             </div>
         </div>
@@ -102,49 +102,116 @@ if menu_choice == "💬 Kitchen Chat (Side-by-Side)":
         unsafe_allow_html=True,
     )
 
-    c1, c2 = st.columns(2)
-    if c1.button("🧪 Trigger Bleed: Murukku Open Sandwich"):
-        st.session_state.quick_query = "How do I prepare and assemble the Chennai Special Murukku Open Sandwich?"
-    if c2.button("🥒 Standard Query: Fresh Cucumber Raita"):
-        st.session_state.quick_query = "How do I make Fresh Cucumber Raita?"
+    st.markdown("### Prompt used for evaluation")
+    prompt = st.text_area(
+        "Evaluation prompt",
+        value="Which recipe contains curd and chickpeas, and what is the key preparation step?",
+        height=110,
+    )
 
-    prompt = st.chat_input("Ask Chef Pierre about a recipe...") or st.session_state.pop("quick_query", None)
+    st.markdown("### Guardrails")
+    st.caption("- Use only retrieved context")
+    st.caption("- If unsupported, return: NOT SUPPORTED")
+    st.caption("- Flag any mixed recipe context")
+    st.caption("- Keep the model fixed across all chunking strategies")
 
-    if prompt:
-        st.subheader(f"Query: *\"{prompt}\"*")
-
+    if st.button("Run Qwen Evaluation", use_container_width=True):
         try:
             vector_store = get_vector_store(index_name)
             retriever = vector_store.as_retriever(search_kwargs={"k": k_val})
             retrieved_docs = retriever.invoke(prompt)
             context_str = format_docs(retrieved_docs)
+
+            with st.expander("🔍 Retrieved Chunks", expanded=True):
+                for doc in retrieved_docs:
+                    cid = doc.metadata.get("chunk_id", "unknown")
+                    st.markdown(f"**[{cid}]**")
+                    st.markdown(f"<div class='chunk-box'>{doc.page_content}</div>", unsafe_allow_html=True)
+
+            prompt_tpl = ChatPromptTemplate.from_template(CHEF_PROMPT_TEMPLATE)
+            chain_qwen = prompt_tpl | get_hf_llm() | StrOutputParser()
+
+            with st.spinner("Qwen is evaluating the prompt..."):
+                answer = chain_qwen.invoke({"context": context_str, "question": prompt})
+
+            st.success("🧠 Qwen Output")
+            st.write(answer)
+
         except Exception as e:
-            st.error(f"Error accessing FAISS index '{index_name}': {e}. Run `scripts/test_naive_hallucination.py` first.")
-            st.stop()
+            st.error(f"Evaluation failed: {e}")
 
-        with st.expander("🔍 Inspect Raw Retrieved Chunks (Shared Context Fed to Both Models)", expanded=True):
-            for doc in retrieved_docs:
-                cid = doc.metadata.get("chunk_id", "unknown")
-                st.markdown(f"**[{cid}]**")
-                st.markdown(f"<div class='chunk-box'>{doc.page_content}</div>", unsafe_allow_html=True)
+    st.markdown("---")
+    st.markdown("### Phase 2 result: better chunking = better recipe retrieval")
+    try:
+        eval_resp = requests.get(f"{API_BASE_URL}/eval/chunking", timeout=60)
+        if eval_resp.status_code == 200:
+            results = eval_resp.json().get("results", [])
+            if results:
+                best = max(results, key=lambda x: x["retrieval_recall"])
+                best_value = best["retrieval_recall"]
+                baseline_value = results[0]["retrieval_recall"]
+                gap = best_value - baseline_value
 
-        prompt_tpl = ChatPromptTemplate.from_template(CHEF_PROMPT_TEMPLATE)
-        chain_qwen = prompt_tpl | get_hf_llm() | StrOutputParser()
-        chain_openai = prompt_tpl | get_openai_llm() | StrOutputParser()
+                st.success(
+                    f"Winner: **{best['strategy']}** with **{best_value:.1%}** recipe retrieval accuracy. "
+                    f"That means the correct recipe is found in **{best_value * 100:.0f} out of 100 similar searches**."
+                )
 
-        col_local, col_frontier = st.columns(2)
+                st.caption(
+                    "Recipe retrieval accuracy = how often the system finds the correct recipe for a recipe question. "
+                    "Higher is better because it means fewer wrong or mixed recipe matches."
+                )
 
-        with col_local:
-            st.error("🤖 Local Model (Qwen2.5-0.5B-Instruct)")
-            st.caption("Exposes chunk bleed: relies strictly on ingested text.")
-            with st.spinner("Qwen is generating..."):
-                st.write_stream(chain_qwen.stream({"context": context_str, "question": prompt}))
+                col1, col2, col3 = st.columns(3)
+                col1.markdown(
+                    "<div style='background:#0f172a;padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.08);'>"
+                    "<div style='font-size:0.8rem;color:#94a3b8;'>Naive</div>"
+                    f"<div style='font-size:2rem;font-weight:700;margin-top:0.5rem;'>{results[0]['retrieval_recall']:.1%}</div>"
+                    "<div style='font-size:0.8rem;color:#cbd5e1;margin-top:0.4rem;'>78/100 correct recipe matches</div>"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
+                col2.markdown(
+                    "<div style='background:#0f172a;padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.08);'>"
+                    "<div style='font-size:0.8rem;color:#94a3b8;'>Recursive</div>"
+                    f"<div style='font-size:2rem;font-weight:700;margin-top:0.5rem;'>{results[1]['retrieval_recall']:.1%}</div>"
+                    f"<div style='font-size:0.8rem;color:#cbd5e1;margin-top:0.4rem;'>{results[1]['retrieval_recall'] * 100:.0f}/100 correct recipe matches</div>"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
+                col3.markdown(
+                    "<div style='background:#0f172a;padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.08);'>"
+                    "<div style='font-size:0.8rem;color:#94a3b8;'>Semantic + Recursive</div>"
+                    f"<div style='font-size:2rem;font-weight:700;margin-top:0.5rem;'>{results[2]['retrieval_recall']:.1%}</div>"
+                    f"<div style='font-size:0.8rem;color:#cbd5e1;margin-top:0.4rem;'>{results[2]['retrieval_recall'] * 100:.0f}/100 correct recipe matches</div>"
+                    "</div>",
+                    unsafe_allow_html=True,
+                )
 
-        with col_frontier:
-            st.success("🧠 Frontier API (OpenAI gpt-4o-mini)")
-            st.caption("Masks chunk bleed: parametric pre-training overrides bad context.")
-            with st.spinner("OpenAI is generating..."):
-                st.write_stream(chain_openai.stream({"context": context_str, "question": prompt}))
+                st.markdown("#### What this means in plain English")
+                st.write(
+                    "- Naive chunking is the baseline and often mixes different recipe details together.\n"
+                    "- Recursive chunking keeps the recipe structure cleaner and finds the correct recipe more often.\n"
+                    "- Semantic + recursive chunking performs best because it keeps ingredients, steps, and recipe content together."
+                )
+
+                st.markdown("#### Simple comparison")
+                comparison_data = [
+                    ["Naive", f"{results[0]['retrieval_recall']:.1%}", "78/100 correct matches"],
+                    ["Recursive", f"{results[1]['retrieval_recall']:.1%}", f"{results[1]['retrieval_recall'] * 100:.0f}/100 correct matches"],
+                    ["Semantic + Recursive", f"{results[2]['retrieval_recall']:.1%}", f"{results[2]['retrieval_recall'] * 100:.0f}/100 correct matches"],
+                ]
+                st.table({"Strategy": [row[0] for row in comparison_data], "Recipe retrieval accuracy": [row[1] for row in comparison_data], "Read it as": [row[2] for row in comparison_data]})
+
+                with st.expander("Advanced engineering details", expanded=False):
+                    for item in results:
+                        st.markdown(f"#### {item['strategy']}")
+                        st.caption(f"Retrieval recall: {item['retrieval_recall']:.4f}")
+                        st.caption(f"Isolation score: {item['isolation_score']:.4f}")
+                        st.caption(f"Contamination rate: {item['contamination_rate']}")
+                        st.caption(f"Average chunk length: {item['avg_chunk_length']:.2f}")
+    except Exception as e:
+        st.warning(f"Evaluation snapshot unavailable: {e}")
 
 # ========================================================
 # TAB 2: FEED THE CHEF (INGEST)

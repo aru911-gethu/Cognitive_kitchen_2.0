@@ -17,7 +17,11 @@ if sys.platform == "win32":
 from cognitive_kitchen.ingestion.pdf_parser import PDFRecipeParser
 from cognitive_kitchen.ingestion.category_scraper import CategoryMenuScraper
 from cognitive_kitchen.ingestion.naive_chunker import NaiveChunker
+from cognitive_kitchen.ingestion.recursive_splitter import RecursiveRecipeChunker
+from cognitive_kitchen.ingestion.semantic_chunker import LocalSemanticRecipeChunker
+from cognitive_kitchen.ingestion.combined_chunker import CombinedSemanticRecursiveChunker
 from cognitive_kitchen.ingestion.schemas import DocumentChunk
+from cognitive_kitchen.evaluation.chunking_evaluator import evaluate_all_strategies
 
 
 @asynccontextmanager
@@ -182,6 +186,52 @@ def chunk_text_naive(payload: ChunkRequest):
         "total_chunks": len(chunks),
         "chunks": [c.model_dump() for c in chunks],
     }
+
+
+@app.post("/chunk/recursive")
+def chunk_text_recursive(payload: ChunkRequest):
+    """Structure-aware recursive chunking endpoint."""
+    chunker = RecursiveRecipeChunker(chunk_size=payload.chunk_size, chunk_overlap=payload.chunk_overlap)
+    chunks = chunker.chunk_text(text=payload.text, doc_id=payload.doc_id)
+    return {
+        "total_chunks": len(chunks),
+        "chunks": [c.model_dump() for c in chunks],
+    }
+
+
+@app.post("/chunk/semantic")
+def chunk_text_semantic(payload: ChunkRequest):
+    """Semantic sentence-boundary chunking endpoint."""
+    chunker = LocalSemanticRecipeChunker(distance_threshold=0.55, min_chunk_length=50)
+    chunks = chunker.chunk_text(text=payload.text, doc_id=payload.doc_id)
+    return {
+        "total_chunks": len(chunks),
+        "chunks": [c.model_dump() for c in chunks],
+    }
+
+
+@app.post("/chunk/combined")
+def chunk_text_combined(payload: ChunkRequest):
+    """Combined recursive + semantic chunking endpoint."""
+    chunker = CombinedSemanticRecursiveChunker(
+        recursive_splitter=RecursiveRecipeChunker(chunk_size=payload.chunk_size, chunk_overlap=payload.chunk_overlap),
+        semantic_chunker=LocalSemanticRecipeChunker(distance_threshold=0.55, min_chunk_length=50),
+    )
+    chunks = chunker.chunk_text(text=payload.text, doc_id=payload.doc_id)
+    return {
+        "total_chunks": len(chunks),
+        "chunks": [c.model_dump() for c in chunks],
+    }
+
+
+@app.get("/eval/chunking")
+def chunking_evaluation():
+    """Run the Qwen-relevant chunking comparison over the golden dataset."""
+    try:
+        results = evaluate_all_strategies("data/golden_datasets/golden_recipes.json")
+        return {"results": results}
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Evaluation failed: {exc}")
 
 
 @app.post("/chat/chef")
