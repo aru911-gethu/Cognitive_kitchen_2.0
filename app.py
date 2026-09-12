@@ -92,9 +92,9 @@ if menu_choice == "💬 Evaluation Lab":
         <div class="chef-hero">
             <img src="{CHEF_AVATAR_URL}" class="chef-img">
             <div>
-                <h2 style="margin: 0; font-size: 1.4rem;">Cognitive Kitchen: Qwen Chunking Evaluation Lab</h2>
+                <h2 style="margin: 0; font-size: 1.4rem;">Cognitive Kitchen: Retrieval Quality Lab</h2>
                 <p style="margin: 0; color: #94a3b8; font-size: 0.9rem;">
-                    Compare <b>naive</b>, <b>recursive</b>, and <b>semantic + recursive</b> chunking using the same Qwen model.
+                    Compare <b>naive</b>, <b>recursive</b>, and <b>hybrid + reranked</b> retrieval using the same user questions.
                 </p>
             </div>
         </div>
@@ -102,20 +102,16 @@ if menu_choice == "💬 Evaluation Lab":
         unsafe_allow_html=True,
     )
 
-    st.markdown("### Prompt used for evaluation")
+    st.markdown("### Ask a recipe question")
     prompt = st.text_area(
-        "Evaluation prompt",
-        value="Which recipe contains curd and chickpeas, and what is the key preparation step?",
+        "Your question",
+        value="Which recipe contains curd and chickpeas?",
         height=110,
     )
 
-    st.markdown("### Guardrails")
-    st.caption("- Use only retrieved context")
-    st.caption("- If unsupported, return: NOT SUPPORTED")
-    st.caption("- Flag any mixed recipe context")
-    st.caption("- Keep the model fixed across all chunking strategies")
+    st.caption("Use a real user question. This is the same prompt used to compare retrieval quality across strategies.")
 
-    if st.button("Run Qwen Evaluation", use_container_width=True):
+    if st.button("Run Evaluation", use_container_width=True):
         try:
             vector_store = get_vector_store(index_name)
             retriever = vector_store.as_retriever(search_kwargs={"k": k_val})
@@ -131,82 +127,84 @@ if menu_choice == "💬 Evaluation Lab":
             prompt_tpl = ChatPromptTemplate.from_template(CHEF_PROMPT_TEMPLATE)
             chain_qwen = prompt_tpl | get_hf_llm() | StrOutputParser()
 
-            with st.spinner("Qwen is evaluating the prompt..."):
+            with st.spinner("Running the retrieval-and-generation pass..."):
                 answer = chain_qwen.invoke({"context": context_str, "question": prompt})
 
-            st.success("🧠 Qwen Output")
+            st.success("🧠 Recipe answer")
             st.write(answer)
 
         except Exception as e:
             st.error(f"Evaluation failed: {e}")
 
     st.markdown("---")
-    st.markdown("### Phase 2 result: better chunking = better recipe retrieval")
+    st.markdown("### Benchmark results: same user question, different retrieval strategy")
     try:
         eval_resp = requests.get(f"{API_BASE_URL}/eval/chunking", timeout=60)
         if eval_resp.status_code == 200:
             results = eval_resp.json().get("results", [])
             if results:
-                best = max(results, key=lambda x: x["retrieval_recall"])
-                best_value = best["retrieval_recall"]
-                baseline_value = results[0]["retrieval_recall"]
-                gap = best_value - baseline_value
+                best_shortlist = max(results, key=lambda x: x.get("retrieval_recall", 0.0))
+                best_top1 = max(results, key=lambda x: x.get("retrieval_top1_rate", 0.0))
 
                 st.success(
-                    f"Winner: **{best['strategy']}** with **{best_value:.1%}** recipe retrieval accuracy. "
-                    f"That means the correct recipe is found in **{best_value * 100:.0f} out of 100 similar searches**."
+                    f"Best shortlist score: **{best_shortlist['strategy']}** with **{best_shortlist['retrieval_recall']:.1%}** correct recipe in shortlist. "
+                    f"Best top-1 ranking: **{best_top1['strategy']}** with **{best_top1['retrieval_top1_rate']:.1%}** correct recipe ranked first."
                 )
 
-                st.caption(
-                    "Recipe retrieval accuracy = how often the system finds the correct recipe for a recipe question. "
-                    "Higher is better because it means fewer wrong or mixed recipe matches."
-                )
+                st.caption("User-facing metric: did the system include the right recipe in the shortlist? Engineering metric: did it rank it first?")
 
                 col1, col2, col3 = st.columns(3)
-                col1.markdown(
-                    "<div style='background:#0f172a;padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.08);'>"
-                    "<div style='font-size:0.8rem;color:#94a3b8;'>Naive</div>"
-                    f"<div style='font-size:2rem;font-weight:700;margin-top:0.5rem;'>{results[0]['retrieval_recall']:.1%}</div>"
-                    "<div style='font-size:0.8rem;color:#cbd5e1;margin-top:0.4rem;'>78/100 correct recipe matches</div>"
-                    "</div>",
-                    unsafe_allow_html=True,
-                )
-                col2.markdown(
-                    "<div style='background:#0f172a;padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.08);'>"
-                    "<div style='font-size:0.8rem;color:#94a3b8;'>Recursive</div>"
-                    f"<div style='font-size:2rem;font-weight:700;margin-top:0.5rem;'>{results[1]['retrieval_recall']:.1%}</div>"
-                    f"<div style='font-size:0.8rem;color:#cbd5e1;margin-top:0.4rem;'>{results[1]['retrieval_recall'] * 100:.0f}/100 correct recipe matches</div>"
-                    "</div>",
-                    unsafe_allow_html=True,
-                )
-                col3.markdown(
-                    "<div style='background:#0f172a;padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.08);'>"
-                    "<div style='font-size:0.8rem;color:#94a3b8;'>Semantic + Recursive</div>"
-                    f"<div style='font-size:2rem;font-weight:700;margin-top:0.5rem;'>{results[2]['retrieval_recall']:.1%}</div>"
-                    f"<div style='font-size:0.8rem;color:#cbd5e1;margin-top:0.4rem;'>{results[2]['retrieval_recall'] * 100:.0f}/100 correct recipe matches</div>"
-                    "</div>",
-                    unsafe_allow_html=True,
-                )
+                for idx, strategy in enumerate(["naive", "recursive", "semantic_plus_recursive"]):
+                    item = next((r for r in results if r["strategy"] == strategy), None)
+                    if not item:
+                        continue
+                    label_map = {
+                        "naive": "Naive baseline",
+                        "recursive": "Recursive chunking",
+                        "semantic_plus_recursive": "Hybrid / reranked stage",
+                    }
+                    title_map = {
+                        "naive": "Correct recipe in shortlist",
+                        "recursive": "Correct recipe in shortlist",
+                        "semantic_plus_recursive": "Correct recipe in shortlist",
+                    }
+
+                    col = [col1, col2, col3][idx]
+                    col.markdown(
+                        "<div style='background:#0f172a;padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.08);'>"
+                        f"<div style='font-size:0.8rem;color:#94a3b8;'>{title_map[strategy]}</div>"
+                        f"<div style='font-size:2rem;font-weight:700;margin-top:0.5rem;'>{item['retrieval_recall']:.1%}</div>"
+                        f"<div style='font-size:0.8rem;color:#cbd5e1;margin-top:0.4rem;'>{label_map[strategy]}</div>"
+                        "</div>",
+                        unsafe_allow_html=True,
+                    )
+
+                st.markdown("#### Simple comparison")
+                rows = []
+                for item in results:
+                    rows.append(
+                        {
+                            "Strategy": item["strategy"].replace("_", " ").title(),
+                            "Correct recipe in shortlist": f"{item['retrieval_recall']:.1%}",
+                            "Correct recipe is first": f"{item.get('retrieval_top1_rate', 0.0):.1%}",
+                            "Isolation score": f"{item['isolation_score']:.2f}",
+                        }
+                    )
+                st.table(rows)
 
                 st.markdown("#### What this means in plain English")
                 st.write(
-                    "- Naive chunking is the baseline and often mixes different recipe details together.\n"
-                    "- Recursive chunking keeps the recipe structure cleaner and finds the correct recipe more often.\n"
-                    "- Semantic + recursive chunking performs best because it keeps ingredients, steps, and recipe content together."
+                    "- Naive chunking is the baseline and often mixes recipe details across different dishes.\n"
+                    "- Recursive chunking improves the structure by keeping ingredients and instructions closer together.\n"
+                    "- Hybrid retrieval improves the shortlist and helps the system keep the most relevant recipe nearby.\n"
+                    "- The remaining challenge is multi-constraint questions such as 'cold, vegetarian, mint, no curry', where query decomposition and recipe-attribute reasoning will help next."
                 )
 
-                st.markdown("#### Simple comparison")
-                comparison_data = [
-                    ["Naive", f"{results[0]['retrieval_recall']:.1%}", "78/100 correct matches"],
-                    ["Recursive", f"{results[1]['retrieval_recall']:.1%}", f"{results[1]['retrieval_recall'] * 100:.0f}/100 correct matches"],
-                    ["Semantic + Recursive", f"{results[2]['retrieval_recall']:.1%}", f"{results[2]['retrieval_recall'] * 100:.0f}/100 correct matches"],
-                ]
-                st.table({"Strategy": [row[0] for row in comparison_data], "Recipe retrieval accuracy": [row[1] for row in comparison_data], "Read it as": [row[2] for row in comparison_data]})
-
-                with st.expander("Advanced engineering details", expanded=False):
+                with st.expander("Engineering detail: same dataset, same questions, different retrieval strategy", expanded=False):
                     for item in results:
                         st.markdown(f"#### {item['strategy']}")
-                        st.caption(f"Retrieval recall: {item['retrieval_recall']:.4f}")
+                        st.caption(f"Correct recipe in shortlist: {item['retrieval_recall']:.4f}")
+                        st.caption(f"Correct recipe is first: {item.get('retrieval_top1_rate', 0.0):.4f}")
                         st.caption(f"Isolation score: {item['isolation_score']:.4f}")
                         st.caption(f"Contamination rate: {item['contamination_rate']}")
                         st.caption(f"Average chunk length: {item['avg_chunk_length']:.2f}")

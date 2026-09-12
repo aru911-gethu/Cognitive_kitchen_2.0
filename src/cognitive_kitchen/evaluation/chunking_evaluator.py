@@ -118,6 +118,7 @@ class ChunkingEvaluator:
         isolation_score = 1.0 - contamination_rate
 
         retrieval_hits = 0
+        top1_hits = 0
         retrieval_total = 0
         query_results: List[Dict[str, Any]] = []
 
@@ -135,22 +136,27 @@ class ChunkingEvaluator:
                     for emb in chunk_embeddings
                 ]
                 top_indices = list(np.argsort(similarities)[::-1][:3])
+                top_recipe_id = all_chunks[top_indices[0]].metadata.get("recipe_id")
                 retrieved_recipe_ids = {
                     all_chunks[idx].metadata.get("recipe_id")
                     for idx in top_indices
                 }
                 hit = recipe_id in retrieved_recipe_ids
+                top1_hit = top_recipe_id == recipe_id
                 retrieval_hits += int(hit)
+                top1_hits += int(top1_hit)
                 query_results.append(
                     {
                         "query": query,
                         "recipe_id": recipe_id,
                         "hit": hit,
+                        "top1_hit": top1_hit,
                         "retrieved_recipe_ids": sorted(retrieved_recipe_ids),
                     }
                 )
 
         recall = retrieval_hits / retrieval_total if retrieval_total else 0.0
+        top1_rate = top1_hits / retrieval_total if retrieval_total else 0.0
         avg_chunk_count = sum(len(v) for v in recipe_chunks.values()) / max(1, len(recipe_chunks))
         avg_chunk_length = np.mean([len(text) for text in chunk_texts]) if chunk_texts else 0.0
 
@@ -162,6 +168,7 @@ class ChunkingEvaluator:
             "contamination_rate": round(contamination_rate, 4),
             "isolation_score": round(isolation_score, 4),
             "retrieval_recall": round(recall, 4),
+            "retrieval_top1_rate": round(top1_rate, 4),
             "query_results": query_results,
         }
 
