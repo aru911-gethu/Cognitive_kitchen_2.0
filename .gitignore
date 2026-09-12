@@ -1,0 +1,19 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.tmp
+code_dump.txt
+
+# generated runtime data
+/data/raw_pdfs/
+/data/raw_web/
+/data/vector_store/
+
+# editor / OS files
+.vscode/
+.idea/
+.DS_Store

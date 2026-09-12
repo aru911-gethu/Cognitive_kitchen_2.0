@@ -1,0 +1,1309 @@
+{
+  "$schema": "https://cognitivekitchen.ai/schemas/golden_v2.json",
+  "dataset_metadata": {
+    "version": "2.0.0",
+    "domain": "South Indian & Regional Indian Culinary Corpus",
+    "curated_date": "2026-09-12",
+    "total_records": 8,
+    "provenance_sources": [
+      {"id": "SRC_COOKPAD_CHN", "type": "web", "origin": "https://cookpad.com/in/search/chennai"},
+      {"id": "SRC_ESIC_PDF", "type": "pdf", "origin": "The Essential South Indian Cookbook by Srividhya Gopalakrishnan"}
+    ]
+  },
+  "recipes": [
+    {
+      "recipe_id": "GDS_REC_001",
+      "title": "CHANA MADRA / Himachali CHANA MADRA / (Chickpeas Yogurt Gravy)",
+      "canonical_title": "Himachali Chana Madra",
+      "source_ref": {
+        "source_id": "SRC_COOKPAD_CHN",
+        "url": "https://cookpad.com/eng/recipes/25019225",
+        "author": "Jyoti Prakash Assudani"
+      },
+      "cuisine": "Himachali / North Indian",
+      "meal_type": ["lunch", "dinner", "side dish"],
+      "difficulty": "medium",
+      "timing": {
+        "prep_time_minutes": 20,
+        "cook_time_minutes": 25,
+        "total_time_minutes": 45
+      },
+      "yield": {
+        "servings": 3,
+        "serving_unit": "people"
+      },
+      "dietary_profile": {
+        "is_vegetarian": true,
+        "is_vegan": false,
+        "is_gluten_free": false,
+        "is_dairy_free": false,
+        "is_nut_free": true,
+        "allergens": ["dairy (curd, ghee)", "gluten (compounded asafoetida)"]
+      },
+      "ingredients": [
+        {
+          "raw_text": "2 cups Curd, beaten till smooth",
+          "canonical_name": "curd",
+          "category": "dairy",
+          "quantity": 2.0,
+          "unit": "cup",
+          "state": "beaten smooth",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 bowl White Chickpeas(Kabuli Chana) Soaked overnight and boiled",
+          "canonical_name": "kabuli chana",
+          "category": "legume",
+          "quantity": 1.0,
+          "unit": "bowl",
+          "state": "soaked overnight and boiled",
+          "is_optional": false
+        },
+        {
+          "raw_text": "2 tablespoon Ghee",
+          "canonical_name": "ghee",
+          "category": "fat",
+          "quantity": 2.0,
+          "unit": "tbsp",
+          "state": "liquid",
+          "is_optional": false
+        },
+        {
+          "raw_text": "3/4 tablespoon Turmeric powder(Haldi)",
+          "canonical_name": "turmeric powder",
+          "category": "spice",
+          "quantity": 0.75,
+          "unit": "tbsp",
+          "state": "ground",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/2 tbsp Garam masala powder",
+          "canonical_name": "garam masala",
+          "category": "spice_blend",
+          "quantity": 0.5,
+          "unit": "tbsp",
+          "state": "ground",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/2 tablespoon Coriander Powder(Dhania)",
+          "canonical_name": "coriander powder",
+          "category": "spice",
+          "quantity": 0.5,
+          "unit": "tbsp",
+          "state": "ground",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/2 tablespoon Red Chilli powder",
+          "canonical_name": "red chilli powder",
+          "category": "spice",
+          "quantity": 0.5,
+          "unit": "tbsp",
+          "state": "ground",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 teaspoon Cumin seeds(Jeera)",
+          "canonical_name": "cumin seeds",
+          "category": "whole_spice",
+          "quantity": 1.0,
+          "unit": "tsp",
+          "state": "whole",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 tablespoon Ginger Garlic paste",
+          "canonical_name": "ginger garlic paste",
+          "category": "aromatic",
+          "quantity": 1.0,
+          "unit": "tbsp",
+          "state": "paste",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/4 tablespoon asafoetida(hing)",
+          "canonical_name": "asafoetida",
+          "category": "spice",
+          "quantity": 0.25,
+          "unit": "tbsp",
+          "state": "powder",
+          "is_optional": false
+        },
+        {
+          "raw_text": "2-3 Cloves(Laung)",
+          "canonical_name": "cloves",
+          "category": "whole_spice",
+          "quantity": 3.0,
+          "unit": "count",
+          "state": "whole",
+          "is_optional": false
+        },
+        {
+          "raw_text": "3-4 Whole Black Peppercorns",
+          "canonical_name": "black peppercorns",
+          "category": "whole_spice",
+          "quantity": 4.0,
+          "unit": "count",
+          "state": "whole",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 Bay leaf",
+          "canonical_name": "bay leaf",
+          "category": "whole_spice",
+          "quantity": 1.0,
+          "unit": "leaf",
+          "state": "dried",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 Mace",
+          "canonical_name": "mace",
+          "category": "whole_spice",
+          "quantity": 1.0,
+          "unit": "blade",
+          "state": "dried",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 inch Cinnamon Stick(Dalchini)",
+          "canonical_name": "cinnamon stick",
+          "category": "whole_spice",
+          "quantity": 1.0,
+          "unit": "inch",
+          "state": "whole",
+          "is_optional": false
+        },
+        {
+          "raw_text": "Chopped coriander",
+          "canonical_name": "coriander leaves",
+          "category": "herb",
+          "quantity": null,
+          "unit": "to taste",
+          "state": "chopped",
+          "is_optional": true
+        },
+        {
+          "raw_text": "Salt to taste",
+          "canonical_name": "salt",
+          "category": "seasoning",
+          "quantity": null,
+          "unit": "to taste",
+          "state": "granulated",
+          "is_optional": false
+        }
+      ],
+      "instructions": [
+        {
+          "step_number": 1,
+          "action": "mix",
+          "instruction": "Mix the beaten curd with turmeric powder, garam masala, coriander powder, and red chilli powder in a bowl.",
+          "target_ingredients": ["curd", "turmeric powder", "garam masala", "coriander powder", "red chilli powder"],
+          "equipment": ["mixing bowl", "whisk"]
+        },
+        {
+          "step_number": 2,
+          "action": "temper",
+          "instruction": "Heat ghee in a pan. Add cloves, black peppercorns, bay leaf, mace, cinnamon, cumin seeds, and asafoetida. Sauté briefly.",
+          "target_ingredients": ["ghee", "cloves", "black peppercorns", "bay leaf", "mace", "cinnamon stick", "cumin seeds", "asafoetida"],
+          "equipment": ["pan"]
+        },
+        {
+          "step_number": 3,
+          "action": "simmer",
+          "instruction": "Add the ginger-garlic paste and the prepared curd-spice mixture into the pan. Cook on low heat for 15-20 minutes until the ghee separates.",
+          "target_ingredients": ["ginger garlic paste", "curd"],
+          "equipment": ["pan"]
+        },
+        {
+          "step_number": 4,
+          "action": "boil",
+          "instruction": "Add the boiled white chickpeas with salt and simmer for another 10-15 minutes.",
+          "target_ingredients": ["kabuli chana", "salt"],
+          "equipment": ["pan"]
+        },
+        {
+          "step_number": 5,
+          "action": "garnish",
+          "instruction": "Open the lid, garnish with chopped coriander leaves, and serve with missi roti or steamed rice.",
+          "target_ingredients": ["coriander leaves"],
+          "equipment": []
+        }
+      ],
+      "verbatim_ground_truth": "CHANA MADRA / Himachali CHANA MADRA / (Chickpeas Yogurt Gravy)... 2 cups Curd, beaten till smooth... 1 bowl White Chickpeas(Kabuli Chana) Soaked overnight and boiled... Now its time to add curd + spices mixture which we have already made, add the mixture into pan and cook for 15-20 mins... Now add boiled White Chickpeas with some salt and again cook for 10-15 mins."
+    },
+    {
+      "recipe_id": "GDS_REC_002",
+      "title": "Chennai Special Murukku Open Sandwich (Tamilnadu Evening Snacks)",
+      "canonical_title": "Murukku Sandwich",
+      "source_ref": {
+        "source_id": "SRC_COOKPAD_CHN",
+        "url": "https://cookpad.com/eng/recipes/24977933",
+        "author": "Sudha Dhanuka"
+      },
+      "cuisine": "Tamil Nadu / Chennai Street Snack",
+      "meal_type": ["snack", "appetizer"],
+      "difficulty": "easy",
+      "timing": {
+        "prep_time_minutes": 10,
+        "cook_time_minutes": 0,
+        "total_time_minutes": 10
+      },
+      "yield": {
+        "servings": 1,
+        "serving_unit": "portion"
+      },
+      "dietary_profile": {
+        "is_vegetarian": true,
+        "is_vegan": false,
+        "is_gluten_free": false,
+        "is_dairy_free": false,
+        "is_nut_free": true,
+        "allergens": ["dairy (cheese)"]
+      },
+      "ingredients": [
+        {
+          "raw_text": "4 murukku",
+          "canonical_name": "murukku",
+          "category": "grain_snack",
+          "quantity": 4.0,
+          "unit": "piece",
+          "state": "crispy whole",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 onion chopped",
+          "canonical_name": "onion",
+          "category": "vegetable",
+          "quantity": 1.0,
+          "unit": "whole",
+          "state": "finely chopped",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 tomato chopped",
+          "canonical_name": "tomato",
+          "category": "vegetable",
+          "quantity": 1.0,
+          "unit": "whole",
+          "state": "chopped",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 boiled potato chopped",
+          "canonical_name": "potato",
+          "category": "vegetable",
+          "quantity": 1.0,
+          "unit": "whole",
+          "state": "boiled and chopped",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/4 cup green chutney",
+          "canonical_name": "green chutney",
+          "category": "condiment",
+          "quantity": 0.25,
+          "unit": "cup",
+          "state": "liquid sauce",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/4 cup nylon sev",
+          "canonical_name": "nylon sev",
+          "category": "topping",
+          "quantity": 0.25,
+          "unit": "cup",
+          "state": "crispy fine",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 cheese cube grated",
+          "canonical_name": "processed cheese",
+          "category": "dairy",
+          "quantity": 1.0,
+          "unit": "cube",
+          "state": "grated",
+          "is_optional": false
+        },
+        {
+          "raw_text": "Chat masala jeera masala salt to taste",
+          "canonical_name": "chaat spice blend",
+          "category": "spice_blend",
+          "quantity": null,
+          "unit": "to taste",
+          "state": "ground",
+          "is_optional": false
+        }
+      ],
+      "instructions": [
+        {
+          "step_number": 1,
+          "action": "arrange",
+          "instruction": "Take a serving plate and arrange the murukku rounds evenly.",
+          "target_ingredients": ["murukku"],
+          "equipment": ["plate"]
+        },
+        {
+          "step_number": 2,
+          "action": "spread",
+          "instruction": "Spread spicy green chutney generously across the top surface of each murukku.",
+          "target_ingredients": ["green chutney"],
+          "equipment": ["spoon"]
+        },
+        {
+          "step_number": 3,
+          "action": "layer",
+          "instruction": "Evenly distribute chopped onions, chopped tomatoes, and boiled chopped potatoes on each piece.",
+          "target_ingredients": ["onion", "tomato", "potato"],
+          "equipment": []
+        },
+        {
+          "step_number": 4,
+          "action": "season",
+          "instruction": "Dust with chaat masala, jeera masala, and a pinch of salt. Dab an additional drop of green chutney on top.",
+          "target_ingredients": ["chaat spice blend", "green chutney"],
+          "equipment": []
+        },
+        {
+          "step_number": 5,
+          "action": "garnish",
+          "instruction": "Cover generously with grated cheese and crisp nylon sev. Serve immediately before murukku turns soggy.",
+          "target_ingredients": ["processed cheese", "nylon sev"],
+          "equipment": ["cheese grater"]
+        }
+      ],
+      "verbatim_ground_truth": "Chennai Special Murukku Open Sandwich (Tamilnadu Evening Snacks)... 4 murukku, 1 onion chopped, 1 tomato chopped, 1 boiled potato chopped, 1/4 cup green chutney, 1/4 cup nylon sev, 1 cheese cube grated... 1 Take a plate and arrange murukku. 2 Spread green chutney. 3 Add onion tomato and potato... 6 Add grated cheese and nylon sev 7 Serve immediately."
+    },
+    {
+      "recipe_id": "GDS_REC_003",
+      "title": "Madras Sambar",
+      "canonical_title": "Traditional Madras Sambar",
+      "source_ref": {
+        "source_id": "SRC_COOKPAD_CHN",
+        "url": "https://cookpad.com/eng/recipes/22568825",
+        "author": "ZMA"
+      },
+      "cuisine": "South Indian / Tamil",
+      "meal_type": ["lunch", "dinner", "stew"],
+      "difficulty": "medium",
+      "timing": {
+        "prep_time_minutes": 20,
+        "cook_time_minutes": 35,
+        "total_time_minutes": 55
+      },
+      "yield": {
+        "servings": 8,
+        "serving_unit": "servings"
+      },
+      "dietary_profile": {
+        "is_vegetarian": true,
+        "is_vegan": true,
+        "is_gluten_free": false,
+        "is_dairy_free": true,
+        "is_nut_free": true,
+        "allergens": ["gluten (compounded asafoetida)"]
+      },
+      "ingredients": [
+        {
+          "raw_text": "1 1/2 cups Pigeon Pea Lentils or Toor Daal",
+          "canonical_name": "toor dal",
+          "category": "legume",
+          "quantity": 1.5,
+          "unit": "cup",
+          "state": "pressure cooked and mashed",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/2 cup Shallots",
+          "canonical_name": "shallots",
+          "category": "vegetable",
+          "quantity": 0.5,
+          "unit": "cup",
+          "state": "peeled whole",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/2 cup Drumsticks",
+          "canonical_name": "drumsticks",
+          "category": "vegetable",
+          "quantity": 0.5,
+          "unit": "cup",
+          "state": "cut into lengths",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/2 cup Yellow Pumpkin, Green Pumpkin, Brinjals",
+          "canonical_name": "mixed sambar vegetables",
+          "category": "vegetable",
+          "quantity": 1.5,
+          "unit": "cup",
+          "state": "chunked",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/4 cup Tamarind soaked",
+          "canonical_name": "tamarind",
+          "category": "sour_agent",
+          "quantity": 0.25,
+          "unit": "cup",
+          "state": "soaked in 1 cup water",
+          "is_optional": false
+        },
+        {
+          "raw_text": "Sambar Masala: 2 tbsp Chana Daal, 2 tbsp Urad Daal, 1/2 cup fresh grated Coconut, 2 tbsp Coriander seeds, 1 tsp Fenugreek seeds, 7-8 dry Red Chillies",
+          "canonical_name": "fresh roasted sambar masala",
+          "category": "spice_blend",
+          "quantity": 3.0,
+          "unit": "tbsp",
+          "state": "roasted and freshly powdered",
+          "is_optional": false
+        },
+        {
+          "raw_text": "Tempering: 3 tbsp Oil, 1 tsp Black Mustard Seeds, 2 sprigs Curry Leaves, 5-6 dry Red Chillies, 1/4 tsp Asafoetida",
+          "canonical_name": "tempering tadka set",
+          "category": "tempering",
+          "quantity": 1.0,
+          "unit": "set",
+          "state": "sautéed in hot oil",
+          "is_optional": false
+        }
+      ],
+      "instructions": [
+        {
+          "step_number": 1,
+          "action": "grind",
+          "instruction": "Dry roast chana dal, urad dal, fresh coconut, coriander seeds, fenugreek seeds, and dry red chillies. Grind into a fine aromatic sambar powder.",
+          "target_ingredients": ["fresh roasted sambar masala"],
+          "equipment": ["skillet", "spice grinder"]
+        },
+        {
+          "step_number": 2,
+          "action": "boil",
+          "instruction": "Pressure cook toor dal with ginger and turmeric until completely soft. Mash to a smooth consistency.",
+          "target_ingredients": ["toor dal"],
+          "equipment": ["pressure cooker"]
+        },
+        {
+          "step_number": 3,
+          "action": "simmer",
+          "instruction": "Simmer shallots, drumstick, pumpkin, and brinjal in strained tamarind extract and the ground sambar powder until raw acidity leaves.",
+          "target_ingredients": ["shallots", "drumsticks", "mixed sambar vegetables", "tamarind", "fresh roasted sambar masala"],
+          "equipment": ["pot"]
+        },
+        {
+          "step_number": 4,
+          "action": "combine",
+          "instruction": "Stir the mashed toor dal into the simmering broth. Adjust consistency with hot water and boil for 5-7 minutes.",
+          "target_ingredients": ["toor dal"],
+          "equipment": ["pot"]
+        },
+        {
+          "step_number": 5,
+          "action": "temper",
+          "instruction": "In a tadka pan, heat oil and splutter mustard seeds, curry leaves, hing, and whole dry red chillies. Pour immediately into the sambar and cover.",
+          "target_ingredients": ["tempering tadka set"],
+          "equipment": ["tadka pan"]
+        }
+      ],
+      "verbatim_ground_truth": "Madras Sambar... 1 1/2 cups Pigeon Pea Lentils or Toor Daal... 1/4 cup Tamarind soaked... Sambar Masala- 2 tbsp Bengal Gram... 1/2 cup fresh grated Coconut... Dry roast the ingredients mentioned under sambar powder and make a powder of it... Open the lid and add one fourth of the tamarind pulp mixed with a cup of water. Simmer on a medium flame."
+    },
+    {
+      "recipe_id": "GDS_REC_004",
+      "title": "Vegetable Brinji rice",
+      "canonical_title": "Chennai Hotel Style Vegetable Brinji",
+      "source_ref": {
+        "source_id": "SRC_COOKPAD_CHN",
+        "url": "https://cookpad.com/eng/recipes/25362099",
+        "author": "Muniswari.G"
+      },
+      "cuisine": "Tamil Nadu / Chennai",
+      "meal_type": ["lunch", "main dish"],
+      "difficulty": "medium",
+      "timing": {
+        "prep_time_minutes": 25,
+        "cook_time_minutes": 35,
+        "total_time_minutes": 60
+      },
+      "yield": {
+        "servings": 4,
+        "serving_unit": "people"
+      },
+      "dietary_profile": {
+        "is_vegetarian": true,
+        "is_vegan": false,
+        "is_gluten_free": false,
+        "is_dairy_free": false,
+        "is_nut_free": true,
+        "allergens": ["dairy (curd, ghee)", "gluten (bread croutons)"]
+      },
+      "ingredients": [
+        {
+          "raw_text": "2 cups seeraga samba rice",
+          "canonical_name": "seeraga samba rice",
+          "category": "grain",
+          "quantity": 2.0,
+          "unit": "cup",
+          "state": "rinsed and soaked",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 1/2 cups fresh coconut milk",
+          "canonical_name": "coconut milk",
+          "category": "liquid",
+          "quantity": 1.5,
+          "unit": "cup",
+          "state": "freshly extracted",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 1/2 cups water",
+          "canonical_name": "water",
+          "category": "liquid",
+          "quantity": 1.5,
+          "unit": "cup",
+          "state": "room temperature",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 tbsp ghee + 1 tbsp oil",
+          "canonical_name": "ghee and oil",
+          "category": "fat",
+          "quantity": 2.0,
+          "unit": "tbsp",
+          "state": "liquid",
+          "is_optional": false
+        },
+        {
+          "raw_text": "Whole spices: 1 tsp fennel seeds, 2 inch cinnamon, 5 cloves, 4 green cardamom, 3 bay leaves (brinji elai)",
+          "canonical_name": "brinji whole spices",
+          "category": "whole_spice",
+          "quantity": 1.0,
+          "unit": "set",
+          "state": "whole dried",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 1/2 cups chopped vegetables",
+          "canonical_name": "mixed vegetables",
+          "category": "vegetable",
+          "quantity": 1.5,
+          "unit": "cup",
+          "state": "chopped",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 tbsp ginger garlic paste",
+          "canonical_name": "ginger garlic paste",
+          "category": "aromatic",
+          "quantity": 1.0,
+          "unit": "tbsp",
+          "state": "paste",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 handful chopped mint leaves + 1 handful coriander leaves",
+          "canonical_name": "mint and coriander",
+          "category": "herb",
+          "quantity": 1.0,
+          "unit": "handful",
+          "state": "finely chopped",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/4 cup curd",
+          "canonical_name": "curd",
+          "category": "dairy",
+          "quantity": 0.25,
+          "unit": "cup",
+          "state": "whisked",
+          "is_optional": false
+        },
+        {
+          "raw_text": "5 bread slices",
+          "canonical_name": "bread",
+          "category": "bakery",
+          "quantity": 5.0,
+          "unit": "slice",
+          "state": "cubed and fried in ghee",
+          "is_optional": false
+        }
+      ],
+      "instructions": [
+        {
+          "step_number": 1,
+          "action": "extract_and_soak",
+          "instruction": "Grind fresh coconut and strain to extract fresh coconut milk. Soak the seeraga samba rice in the coconut milk and water mixture for 30 minutes.",
+          "target_ingredients": ["coconut milk", "water", "seeraga samba rice"],
+          "equipment": ["blender", "strainer", "rice cooker bowl"]
+        },
+        {
+          "step_number": 2,
+          "action": "temper",
+          "instruction": "Heat ghee and oil. Add fennel seeds, bay leaf, cinnamon stick, cloves, and cardamom until aromatic.",
+          "target_ingredients": ["ghee and oil", "brinji whole spices"],
+          "equipment": ["pan"]
+        },
+        {
+          "step_number": 3,
+          "action": "sauté",
+          "instruction": "Sauté sliced onions, ginger garlic paste, green chilies, and chopped tomatoes until tomatoes soften and oil separates.",
+          "target_ingredients": ["ginger garlic paste"],
+          "equipment": ["pan"]
+        },
+        {
+          "step_number": 4,
+          "action": "braise",
+          "instruction": "Stir in curd, chopped vegetables, and chilli powder. Add a small splash of water and par-cook the vegetables.",
+          "target_ingredients": ["curd", "mixed vegetables"],
+          "equipment": ["pan"]
+        },
+        {
+          "step_number": 5,
+          "action": "cook",
+          "instruction": "Transfer vegetable masala into the electric cooker bowl with soaked rice and coconut milk. Cook until steam stops and rice is fluffy.",
+          "target_ingredients": ["seeraga samba rice", "mint and coriander"],
+          "equipment": ["electric rice cooker"]
+        },
+        {
+          "step_number": 6,
+          "action": "garnish",
+          "instruction": "Cut bread slices into small cubes, fry in 1 tbsp ghee until crisp, and fold into the warm brinji rice before serving.",
+          "target_ingredients": ["bread", "ghee and oil"],
+          "equipment": ["frying pan"]
+        }
+      ],
+      "verbatim_ground_truth": "Vegetable Brinji rice... 2 cups seeraga samba rice, 1 1/2 cups fresh coconut milk, 1 1/2 cups water... 5 bread slices... First, grind the coconut in a mixer and strain it to extract the coconut milk... Cut the bread into four pieces, add 1 tablespoon of ghee to the pan, add the bread and fry. Add the fried bread to the brinji."
+    },
+    {
+      "recipe_id": "GDS_REC_005",
+      "title": "Idli | Savory Rice Cakes",
+      "canonical_title": "Steamed Idli",
+      "source_ref": {
+        "source_id": "SRC_ESIC_PDF",
+        "url": "local://The Essential South Indian Cookbook",
+        "page_number": 41,
+        "author": "Srividhya Gopalakrishnan"
+      },
+      "cuisine": "Tamil Nadu / South Indian",
+      "meal_type": ["breakfast", "dinner"],
+      "difficulty": "medium",
+      "timing": {
+        "prep_time_minutes": 20,
+        "fermentation_hours": 10,
+        "cook_time_minutes": 15,
+        "total_time_minutes": 635
+      },
+      "yield": {
+        "servings": 8,
+        "serving_unit": "servings"
+      },
+      "dietary_profile": {
+        "is_vegetarian": true,
+        "is_vegan": true,
+        "is_gluten_free": true,
+        "is_dairy_free": true,
+        "is_nut_free": true,
+        "allergens": []
+      },
+      "ingredients": [
+        {
+          "raw_text": "2 cups idli rice, rinsed at least four times in cold water, drained well",
+          "canonical_name": "idli rice",
+          "category": "grain",
+          "quantity": 2.0,
+          "unit": "cup",
+          "state": "rinsed and drained",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/2 cup husked whole black lentils, rinsed at least four times in cold water, drained well",
+          "canonical_name": "urad dal",
+          "category": "legume",
+          "quantity": 0.5,
+          "unit": "cup",
+          "state": "rinsed and drained",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 teaspoon fenugreek seeds",
+          "canonical_name": "fenugreek seeds",
+          "category": "whole_spice",
+          "quantity": 1.0,
+          "unit": "tsp",
+          "state": "whole",
+          "is_optional": false
+        },
+        {
+          "raw_text": "2 1/4 cups cold water, divided",
+          "canonical_name": "cold water",
+          "category": "liquid",
+          "quantity": 2.25,
+          "unit": "cup",
+          "state": "chilled",
+          "is_optional": false
+        },
+        {
+          "raw_text": "4 ice cubes",
+          "canonical_name": "ice cubes",
+          "category": "liquid",
+          "quantity": 4.0,
+          "unit": "cube",
+          "state": "frozen",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 teaspoon salt",
+          "canonical_name": "salt",
+          "category": "seasoning",
+          "quantity": 1.0,
+          "unit": "tsp",
+          "state": "granulated",
+          "is_optional": false
+        },
+        {
+          "raw_text": "4 teaspoons vegetable or corn oil, divided",
+          "canonical_name": "oil",
+          "category": "fat",
+          "quantity": 4.0,
+          "unit": "tsp",
+          "state": "liquid for greasing",
+          "is_optional": false
+        }
+      ],
+      "instructions": [
+        {
+          "step_number": 1,
+          "action": "soak",
+          "instruction": "In a large bowl, soak rice in cold water (covered by 2-3 inches). In a separate bowl, soak black lentils and fenugreek seeds (covered by 3-4 inches) for 6 to 8 hours.",
+          "target_ingredients": ["idli rice", "urad dal", "fenugreek seeds"],
+          "equipment": ["two large mixing bowls"]
+        },
+        {
+          "step_number": 2,
+          "action": "grind_dal",
+          "instruction": "Drain lentils and fenugreek seeds. Transfer to blender. Blend until smooth, adding 1/2 to 3/4 cup cold water a little at a time. Transfer to large bowl.",
+          "target_ingredients": ["urad dal", "fenugreek seeds", "cold water"],
+          "equipment": ["blender", "large bowl"]
+        },
+        {
+          "step_number": 3,
+          "action": "grind_rice",
+          "instruction": "Drain rice and add half to the blender with 2 ice cubes and 1/2 cup cold water. Grind smooth. Repeat with the second half, 2 ice cubes, and 1/2 cup cold water.",
+          "target_ingredients": ["idli rice", "ice cubes", "cold water"],
+          "equipment": ["blender"]
+        },
+        {
+          "step_number": 4,
+          "action": "ferment",
+          "instruction": "Combine ground rice and dal batters with salt. Mix thoroughly using clean hands (body warmth aids fermentation). Cover and place in warm oven (with light on) for 8-10 hours until doubled in volume.",
+          "target_ingredients": ["salt"],
+          "equipment": ["large bowl", "warm oven"]
+        },
+        {
+          "step_number": 5,
+          "action": "steam",
+          "instruction": "Bring 1 cup of water to boil in idli steamer. Grease idli molds with 1/4 tsp oil each. Fill molds 3/4 full with batter. Place plates in steamer, reduce heat to medium-low, cover and steam for 10 minutes.",
+          "target_ingredients": ["oil"],
+          "equipment": ["idli steamer", "idli rack"]
+        },
+        {
+          "step_number": 6,
+          "action": "rest_and_unmold",
+          "instruction": "Turn off heat and let idlis cool covered for 5 minutes. Unmold using a wet spoon and serve hot with coconut chutney.",
+          "target_ingredients": [],
+          "equipment": ["spoon"]
+        }
+      ],
+      "verbatim_ground_truth": "Idli | Savory Rice Cakes... Prep time: 20 minutes, plus 6 to 8 hours to soak and 8 to 10 hours to ferment | Cook time: 15 minutes... 2 cups idli rice... 1/2 cup husked whole black lentils... 1 teaspoon fenugreek seeds... 4 ice cubes... steam the idlis for 10 minutes."
+    },
+    {
+      "recipe_id": "GDS_REC_006",
+      "title": "Upma | Savory Semolina Porridge",
+      "canonical_title": "Upma",
+      "source_ref": {
+        "source_id": "SRC_ESIC_PDF",
+        "url": "local://The Essential South Indian Cookbook",
+        "page_number": 45,
+        "author": "Srividhya Gopalakrishnan"
+      },
+      "cuisine": "South Indian / Karnataka & Tamil",
+      "meal_type": ["breakfast", "tiffin"],
+      "difficulty": "easy",
+      "timing": {
+        "prep_time_minutes": 10,
+        "cook_time_minutes": 15,
+        "total_time_minutes": 25
+      },
+      "yield": {
+        "servings": 4,
+        "serving_unit": "servings"
+      },
+      "dietary_profile": {
+        "is_vegetarian": true,
+        "is_vegan": false,
+        "is_gluten_free": false,
+        "is_dairy_free": false,
+        "is_nut_free": true,
+        "allergens": ["gluten (semolina)", "dairy (yogurt, ghee)"]
+      },
+      "ingredients": [
+        {
+          "raw_text": "1 cup roasted semolina, or upma mix",
+          "canonical_name": "semolina",
+          "category": "grain",
+          "quantity": 1.0,
+          "unit": "cup",
+          "state": "dry roasted coarse",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 tablespoon coconut oil",
+          "canonical_name": "coconut oil",
+          "category": "fat",
+          "quantity": 1.0,
+          "unit": "tbsp",
+          "state": "liquid",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/2 teaspoon mustard seeds",
+          "canonical_name": "mustard seeds",
+          "category": "whole_spice",
+          "quantity": 0.5,
+          "unit": "tsp",
+          "state": "whole",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 teaspoon husked whole black lentils",
+          "canonical_name": "urad dal",
+          "category": "legume",
+          "quantity": 1.0,
+          "unit": "tsp",
+          "state": "whole dried",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 teaspoon Bengal gram",
+          "canonical_name": "chana dal",
+          "category": "legume",
+          "quantity": 1.0,
+          "unit": "tsp",
+          "state": "whole dried",
+          "is_optional": false
+        },
+        {
+          "raw_text": "2 green chiles, finely chopped",
+          "canonical_name": "green chiles",
+          "category": "vegetable",
+          "quantity": 2.0,
+          "unit": "whole",
+          "state": "finely chopped",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 teaspoon asafoetida",
+          "canonical_name": "asafoetida",
+          "category": "spice",
+          "quantity": 1.0,
+          "unit": "tsp",
+          "state": "powder",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 curry leaf sprig",
+          "canonical_name": "curry leaves",
+          "category": "herb",
+          "quantity": 1.0,
+          "unit": "sprig",
+          "state": "fresh",
+          "is_optional": false
+        },
+        {
+          "raw_text": "2 cups water",
+          "canonical_name": "water",
+          "category": "liquid",
+          "quantity": 2.0,
+          "unit": "cup",
+          "state": "fresh",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 1/4 teaspoons salt",
+          "canonical_name": "salt",
+          "category": "seasoning",
+          "quantity": 1.25,
+          "unit": "tsp",
+          "state": "granulated",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 tablespoon plain Greek yogurt",
+          "canonical_name": "greek yogurt",
+          "category": "dairy",
+          "quantity": 1.0,
+          "unit": "tbsp",
+          "state": "plain",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 teaspoon finely chopped fresh dill",
+          "canonical_name": "dill leaves",
+          "category": "herb",
+          "quantity": 1.0,
+          "unit": "tsp",
+          "state": "finely chopped",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 teaspoon ghee",
+          "canonical_name": "ghee",
+          "category": "fat",
+          "quantity": 1.0,
+          "unit": "tsp",
+          "state": "clarified",
+          "is_optional": false
+        }
+      ],
+      "instructions": [
+        {
+          "step_number": 1,
+          "action": "temper",
+          "instruction": "In a large skillet over medium heat, heat coconut oil. Add mustard seeds, black lentils, and Bengal gram. Cook until mustard seeds sputter (about 1 minute).",
+          "target_ingredients": ["coconut oil", "mustard seeds", "urad dal", "chana dal"],
+          "equipment": ["large skillet"]
+        },
+        {
+          "step_number": 2,
+          "action": "sauté",
+          "instruction": "Add finely chopped green chiles, asafoetida, and curry leaves. Cook for 45 seconds.",
+          "target_ingredients": ["green chiles", "asafoetida", "curry leaves"],
+          "equipment": ["large skillet"]
+        },
+        {
+          "step_number": 3,
+          "action": "boil",
+          "instruction": "Add water and salt. Bring to a rolling boil and stir in Greek yogurt.",
+          "target_ingredients": ["water", "salt", "greek yogurt"],
+          "equipment": ["large skillet"]
+        },
+        {
+          "step_number": 4,
+          "action": "incorporate",
+          "instruction": "Reduce heat to medium-low. Slowly add the roasted semolina while stirring constantly to prevent lump formation. Stir vigorously, partially cover, and cook for 2 minutes.",
+          "target_ingredients": ["semolina"],
+          "equipment": ["large skillet", "wooden spoon"]
+        },
+        {
+          "step_number": 5,
+          "action": "finish",
+          "instruction": "Turn off heat. Stir in chopped fresh dill and ghee. Partially re-cover and let steam rest for 5 minutes. Serve hot with coconut chutney.",
+          "target_ingredients": ["dill leaves", "ghee"],
+          "equipment": ["large skillet"]
+        }
+      ],
+      "verbatim_ground_truth": "Upma | Savory Semolina Porridge... 1 tablespoon coconut oil, 1/2 teaspoon mustard seeds, 1 teaspoon husked whole black lentils, 1 teaspoon Bengal gram... 1 cup roasted semolina... Bring the water to a rolling boil and stir in the yogurt. Slowly add the semolina, stirring constantly to avoid lumps."
+    },
+    {
+      "recipe_id": "GDS_REC_007",
+      "title": "Ven Pongal | Savory Rice with Split Yellow Mung Beans",
+      "canonical_title": "Ven Pongal",
+      "source_ref": {
+        "source_id": "SRC_ESIC_PDF",
+        "url": "local://The Essential South Indian Cookbook",
+        "page_number": 81,
+        "author": "Srividhya Gopalakrishnan"
+      },
+      "cuisine": "Tamil Nadu",
+      "meal_type": ["breakfast", "temple_offering"],
+      "difficulty": "easy",
+      "timing": {
+        "prep_time_minutes": 10,
+        "cook_time_minutes": 40,
+        "total_time_minutes": 50
+      },
+      "yield": {
+        "servings": 8,
+        "serving_unit": "servings"
+      },
+      "dietary_profile": {
+        "is_vegetarian": true,
+        "is_vegan": false,
+        "is_gluten_free": true,
+        "is_dairy_free": false,
+        "is_nut_free": false,
+        "allergens": ["tree nuts (cashews)", "dairy (ghee)"]
+      },
+      "ingredients": [
+        {
+          "raw_text": "1 1/2 cups short-grain rice, such as sona masoori, rinsed and drained",
+          "canonical_name": "sona masoori rice",
+          "category": "grain",
+          "quantity": 1.5,
+          "unit": "cup",
+          "state": "rinsed and drained",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/2 cup split yellow mung beans, rinsed and drained",
+          "canonical_name": "moong dal",
+          "category": "legume",
+          "quantity": 0.5,
+          "unit": "cup",
+          "state": "rinsed and drained",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 1/2 tablespoons peppercorns, divided",
+          "canonical_name": "whole black peppercorns",
+          "category": "whole_spice",
+          "quantity": 1.5,
+          "unit": "tbsp",
+          "state": "whole",
+          "is_optional": false
+        },
+        {
+          "raw_text": "2 curry leaf sprigs",
+          "canonical_name": "curry leaves",
+          "category": "herb",
+          "quantity": 2.0,
+          "unit": "sprig",
+          "state": "fresh",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 1/2 teaspoons salt",
+          "canonical_name": "salt",
+          "category": "seasoning",
+          "quantity": 1.5,
+          "unit": "tsp",
+          "state": "granulated",
+          "is_optional": false
+        },
+        {
+          "raw_text": "5 cups water",
+          "canonical_name": "water",
+          "category": "liquid",
+          "quantity": 5.0,
+          "unit": "cup",
+          "state": "fresh",
+          "is_optional": false
+        },
+        {
+          "raw_text": "3 tablespoons ghee, or clarified butter",
+          "canonical_name": "ghee",
+          "category": "fat",
+          "quantity": 3.0,
+          "unit": "tbsp",
+          "state": "clarified",
+          "is_optional": false
+        },
+        {
+          "raw_text": "2 tablespoons cumin seeds",
+          "canonical_name": "cumin seeds",
+          "category": "whole_spice",
+          "quantity": 2.0,
+          "unit": "tbsp",
+          "state": "whole",
+          "is_optional": false
+        },
+        {
+          "raw_text": "10 whole cashews",
+          "canonical_name": "cashews",
+          "category": "nut",
+          "quantity": 10.0,
+          "unit": "piece",
+          "state": "whole raw",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 tablespoon finely chopped peeled fresh ginger",
+          "canonical_name": "fresh ginger",
+          "category": "aromatic",
+          "quantity": 1.0,
+          "unit": "tbsp",
+          "state": "finely chopped",
+          "is_optional": false
+        }
+      ],
+      "instructions": [
+        {
+          "step_number": 1,
+          "action": "pressure_cook",
+          "instruction": "In an electric pressure cooker or stovetop cooker, combine rice, moong dal, 1 tbsp peppercorns, curry leaves, salt, and 5 cups water. Cook on High Pressure for 8 minutes (or 4-5 whistles on stovetop). Let release naturally.",
+          "target_ingredients": ["sona masoori rice", "moong dal", "whole black peppercorns", "curry leaves", "salt", "water"],
+          "equipment": ["pressure cooker"]
+        },
+        {
+          "step_number": 2,
+          "action": "mash",
+          "instruction": "Unlock lid. Using a spatula, mix and mash the cooked rice and lentils into a soft, porridge-like consistency.",
+          "target_ingredients": [],
+          "equipment": ["spatula"]
+        },
+        {
+          "step_number": 3,
+          "action": "temper",
+          "instruction": "Melt ghee in a small skillet over medium heat. Fry cumin seeds, cashews, ginger, and remaining 1/2 tbsp whole peppercorns for 1 minute until cashews turn golden.",
+          "target_ingredients": ["ghee", "cumin seeds", "cashews", "fresh ginger", "whole black peppercorns"],
+          "equipment": ["small skillet"]
+        },
+        {
+          "step_number": 4,
+          "action": "combine",
+          "instruction": "Pour the hot sizzling ghee-spice tadka directly into the mashed pongal. Mix thoroughly and serve hot with coconut chutney and sambar.",
+          "target_ingredients": [],
+          "equipment": ["spatula"]
+        }
+      ],
+      "verbatim_ground_truth": "Ven Pongal | Savory Rice with Split Yellow Mung Beans... 1 1/2 cups short-grain rice... 1/2 cup split yellow mung beans... 5 cups water... 3 tablespoons ghee... 2 tablespoons cumin seeds... 10 whole cashews... Pressure cook until the cooker whistles 4 or 5 times... Fry until the cashews turn light golden brown. Add spice mixture to mashed pongal."
+    },
+    {
+      "recipe_id": "GDS_REC_008",
+      "title": "Avial | Mixed Vegetable Curry in Yogurt Sauce",
+      "canonical_title": "Avial",
+      "source_ref": {
+        "source_id": "SRC_ESIC_PDF",
+        "url": "local://The Essential South Indian Cookbook",
+        "page_number": 123,
+        "author": "Srividhya Gopalakrishnan"
+      },
+      "cuisine": "Kerala & Tamil Nadu",
+      "meal_type": ["lunch", "feast_curry"],
+      "difficulty": "medium",
+      "timing": {
+        "prep_time_minutes": 20,
+        "cook_time_minutes": 40,
+        "total_time_minutes": 60
+      },
+      "yield": {
+        "servings": 6,
+        "serving_unit": "servings"
+      },
+      "dietary_profile": {
+        "is_vegetarian": true,
+        "is_vegan": false,
+        "is_gluten_free": true,
+        "is_dairy_free": false,
+        "is_nut_free": true,
+        "allergens": ["dairy (yogurt)"]
+      },
+      "ingredients": [
+        {
+          "raw_text": "4 cups mixed chunked vegetables, such as plantain, drumstick, potato, carrot, squash, winter melon",
+          "canonical_name": "mixed avial vegetables",
+          "category": "vegetable",
+          "quantity": 4.0,
+          "unit": "cup",
+          "state": "baton cut / chunked",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 1/4 cups water, divided",
+          "canonical_name": "water",
+          "category": "liquid",
+          "quantity": 1.25,
+          "unit": "cup",
+          "state": "fresh",
+          "is_optional": false
+        },
+        {
+          "raw_text": "2 teaspoons salt",
+          "canonical_name": "salt",
+          "category": "seasoning",
+          "quantity": 2.0,
+          "unit": "tsp",
+          "state": "granulated",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1/8 teaspoon ground turmeric",
+          "canonical_name": "turmeric powder",
+          "category": "spice",
+          "quantity": 0.125,
+          "unit": "tsp",
+          "state": "ground",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 cup shredded fresh coconut",
+          "canonical_name": "fresh coconut",
+          "category": "fruit",
+          "quantity": 1.0,
+          "unit": "cup",
+          "state": "grated",
+          "is_optional": false
+        },
+        {
+          "raw_text": "3 green chiles",
+          "canonical_name": "green chiles",
+          "category": "vegetable",
+          "quantity": 3.0,
+          "unit": "whole",
+          "state": "whole fresh",
+          "is_optional": false
+        },
+        {
+          "raw_text": "2 curry leaf sprigs",
+          "canonical_name": "curry leaves",
+          "category": "herb",
+          "quantity": 2.0,
+          "unit": "sprig",
+          "state": "fresh",
+          "is_optional": false
+        },
+        {
+          "raw_text": "1 cup thick yogurt, lightly beaten",
+          "canonical_name": "yogurt",
+          "category": "dairy",
+          "quantity": 1.0,
+          "unit": "cup",
+          "state": "lightly beaten smooth",
+          "is_optional": false
+        },
+        {
+          "raw_text": "2 tablespoons coconut oil",
+          "canonical_name": "coconut oil",
+          "category": "fat",
+          "quantity": 2.0,
+          "unit": "tbsp",
+          "state": "virgin cold pressed",
+          "is_optional": false
+        }
+      ],
+      "instructions": [
+        {
+          "step_number": 1,
+          "action": "boil_vegetables",
+          "instruction": "In a large skillet over medium-high heat, combine mixed vegetables, 1 cup of water, salt, and turmeric. Cover and simmer 12-15 minutes until vegetables are tender yet firm.",
+          "target_ingredients": ["mixed avial vegetables", "water", "salt", "turmeric powder"],
+          "equipment": ["large skillet"]
+        },
+        {
+          "step_number": 2,
+          "action": "grind_paste",
+          "instruction": "In a blender, combine coconut and green chiles with remaining 1/4 cup of water. Pulse into a smooth, thick coconut paste.",
+          "target_ingredients": ["fresh coconut", "green chiles", "water"],
+          "equipment": ["blender"]
+        },
+        {
+          "step_number": 3,
+          "action": "simmer",
+          "instruction": "Add coconut paste and fresh curry leaves to the cooked vegetables. Reduce heat to medium and simmer gently for 5 to 7 minutes.",
+          "target_ingredients": ["curry leaves"],
+          "equipment": ["large skillet"]
+        },
+        {
+          "step_number": 4,
+          "action": "finish",
+          "instruction": "Turn off heat. Immediately fold in beaten yogurt and drizzle raw coconut oil across the surface. Cover partially and let rest 10 minutes before serving.",
+          "target_ingredients": ["yogurt", "coconut oil"],
+          "equipment": ["large skillet"]
+        }
+      ],
+      "verbatim_ground_truth": "Avial | Mixed Vegetable Curry in Yogurt Sauce... 4 cups mixed chunked vegetables... 1 cup shredded fresh coconut, 3 green chiles, 1 cup thick yogurt, lightly beaten, 2 tablespoons coconut oil... Turn off the heat and stir in the yogurt and coconut oil."
+    }
+  ]
+}
